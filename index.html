@@ -24,26 +24,29 @@ h2{color:#ff00ff;text-shadow:0 0 8px #ff00ff;border-right:4px solid #ff00ff;padd
 .owner-btn{background:linear-gradient(45deg,#ff0088,#ff00ff);display:none}
 .locked{pointer-events:none;opacity:0.6}
 #msg{color:#00ff88;text-align:center;margin-top:10px;font-weight:bold}
-.email-box{color:#00f5ff;font-weight:bold;text-align:center;margin-bottom:10px}
+.contact-box{background:#1a1a1a;padding:12px;border-radius:10px;text-align:center;color:#00f5ff;font-weight:bold}
+.placeholder{color:#666}
 </style>
 </head>
 <body>
 <div class="container"><div class="content">
-<h1 contenteditable="true" id="name">اكتب اسمك هنا</h1>
-<p contenteditable="true" id="job" style="text-align:center;color:#ff00ff">المسمى الوظيفي</p>
-<p class="email-box">📧 <span contenteditable="true" id="email">ايميلك@gmail.com</span> | 📱 <span contenteditable="true" id="phone">رقمك</span> | 📍 <span contenteditable="true" id="location">مكانك</span></p>
+<h1 contenteditable="true" id="name" class="placeholder">اكتب اسمك هنا</h1>
+<p contenteditable="true" id="job" style="text-align:center;color:#ff00ff" class="placeholder">المسمى الوظيفي</p>
+<div class="contact-box">
+📧 <span contenteditable="true" id="email" class="placeholder">ايميلك@gmail.com</span> | 📱 <span contenteditable="true" id="phone" class="placeholder">رقمك</span> | 📍 <span contenteditable="true" id="location" class="placeholder">مكانك</span>
+</div>
 <h2>الملخص المهني</h2>
-<div class="item" contenteditable="true" id="summary">اكتب عن نفسك هنا</div>
+<div class="item" contenteditable="true" id="summary" class="placeholder">اكتب عن نفسك هنا</div>
 <h2>الخبرات</h2>
-<div class="item" contenteditable="true" id="exp"><b>اسم الوظيفة</b><br>اسم الشركة | 2024<br>المهام</div>
+<div class="item" contenteditable="true" id="exp" class="placeholder"><b>اسم الوظيفة</b><br>اسم الشركة | 2024<br>المهام</div>
 <h2>التعليم</h2>
-<div class="item" contenteditable="true" id="edu"><b>اسم الشهادة</b><br>اسم الجامعة | 2022-2026</div>
+<div class="item" contenteditable="true" id="edu" class="placeholder"><b>اسم الشهادة</b><br>اسم الجامعة | 2022-2026</div>
 <h2>المهارات</h2>
-<div class="item" contenteditable="true" id="skill1">المهارة 1</div>
-<div class="item" contenteditable="true" id="skill2">المهارة 2</div>
-<div class="item" contenteditable="true" id="skill3">المهارة 3</div>
+<div class="item" contenteditable="true" id="skill1" class="placeholder">المهارة 1</div>
+<div class="item" contenteditable="true" id="skill2" class="placeholder">المهارة 2</div>
+<div class="item" contenteditable="true" id="skill3" class="placeholder">المهارة 3</div>
 <h2>المشاريع</h2>
-<div class="item" contenteditable="true" id="project"><b>اسم المشروع</b><br>وصف المشروع</div>
+<div class="item" contenteditable="true" id="project" class="placeholder"><b>اسم المشروع</b><br>وصف المشروع</div>
 <h2>الشهادات المرفقة</h2>
 <div class="upload-box">
 <input type="file" id="certUpload" accept="image/*">
@@ -57,6 +60,14 @@ h2{color:#ff00ff;text-shadow:0 0 8px #ff00ff;border-right:4px solid #ff00ff;padd
 </div></div>
 <script>
 const OWNER_EMAIL = "your-email@gmail.com";
+document.querySelectorAll('[contenteditable="true"]').forEach(el => {
+el.addEventListener('focus', function(){
+if(this.classList.contains('placeholder')){
+this.innerText = '';
+this.classList.remove('placeholder');
+}
+});
+});
 window.onload = function(){
 let saved = localStorage.getItem("cvData");
 let userEmail = localStorage.getItem("userEmail");
@@ -66,6 +77,7 @@ for(let key in data){
 if(document.getElementById(key)) document.getElementById(key).innerHTML = data[key];
 }
 if(document.getElementById('certPreview') && data.cert) document.getElementById('certPreview').innerHTML = data.cert;
+document.querySelectorAll('.placeholder').forEach(el => el.classList.remove('placeholder'));
 }
 if(userEmail && userEmail!== OWNER_EMAIL){
 document.querySelector('.content').classList.add('locked');
@@ -113,5 +125,3 @@ document.getElementById('msg').innerText = "🔓 تم فك القفل. تقدر 
 </script>
 </body>
 </html>
-
-
