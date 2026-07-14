@@ -15,8 +15,12 @@ h1{text-align:center;color:#00f5ff;text-shadow:0 0 10px #00f5ff}
 h2{color:#ff00ff;text-shadow:0 0 8px #ff00ff;border-right:4px solid #ff00ff;padding-right:12px}
 .item{background:#1a1a1a;padding:20px;border-radius:12px;margin-bottom:15px;border-right:3px solid #00f5ff;min-height:60px}
 [contenteditable="true"]:focus{background:#222;border-right:3px solid #ff00ff;outline:none}
+.upload-box{background:#1a1a1a;padding:15px;border-radius:12px;border:2px dashed #00f5ff;text-align:center;margin-bottom:15px}
+.upload-box input{display:none}
+.upload-label{cursor:pointer;color:#00f5ff;font-weight:bold}
+.cert-img{max-width:100%;border-radius:8px;margin-top:10px;border:2px solid #ff00ff}
 .print-btn{background:linear-gradient(45deg,#00f5ff,#ff00ff);border:none;padding:15px;border-radius:10px;color:#000;font-weight:bold;font-size:18px;cursor:pointer;width:100%;margin-top:20px;font-family:'Cairo'}
-@media print{.print-btn{display:none}body{background:#fff;color:#000}}
+@media print{.print-btn{display:none}body{background:#fff;color:#000}.container::before{display:none}}
 </style>
 </head>
 <body>
@@ -43,7 +47,25 @@ h2{color:#ff00ff;text-shadow:0 0 8px #ff00ff;border-right:4px solid #ff00ff;padd
 <div class="item" contenteditable="true">المهارة 3</div>
 <h2>المشاريع</h2>
 <div class="item" contenteditable="true"><b>اسم المشروع</b><br>وصف المشروع</div>
+<h2>الشهادات المرفقة</h2>
+<div class="upload-box no-print">
+<input type="file" id="certUpload" accept="image/*">
+<label for="certUpload" class="upload-label">📎 اضغط لارفاق صورة الشهادة</label>
+</div>
+<div id="certPreview"></div>
 <button class="print-btn" onclick="window.print()">🖨️ حفظ كـ PDF</button>
 </div></div>
+<script>
+document.getElementById('certUpload').addEventListener('change', function(e){
+const file = e.target.files[0];
+if(file){
+const reader = new FileReader();
+reader.onload = function(event){
+document.getElementById('certPreview').innerHTML = `<img src="${event.target.result}" class="cert-img">`;
+}
+reader.readAsDataURL(file);
+}
+});
+</script>
 </body>
 </html>
