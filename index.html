@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>السيرة الذاتية</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+body{font-family:'Cairo';background:#0a0a0a;margin:0;padding:30px;display:flex;justify-content:center}
+.container{max-width:900px;width:100%;background:#121212;border-radius:20px;padding:3px;position:relative}
+.container::before{content:'';position:absolute;top:-3px;left:-3px;right:-3px;bottom:-3px;background:linear-gradient(45deg,#00f5ff,#ff00ff,#00f5ff);background-size:400%;border-radius:20px;z-index:-1;animation:glow 4s linear infinite}
+@keyframes glow{0%{background-position:0% 50%}100%{background-position:400% 50%}}
+.content{background:#121212;border-radius:17px;padding:40px;color:#fff}
+.header{display:flex;gap:30px;align-items:center;border-bottom:2px solid #333;padding-bottom:30px}
+.header img{width:140px;height:140px;border-radius:50%;border:3px solid #00f5ff;box-shadow:0 0 25px #00f5ff}
+h1{color:#00f5ff;text-shadow:0 0 10px #00f5ff;margin:0}
+h2{color:#ff00ff;border-right:4px solid #ff00ff;padding-right:12px;text-shadow:0 0 8px #ff00ff}
+.item{background:#1a1a1a;padding:15px;border-radius:10px;margin-bottom:12px;border-right:3px solid #00f5ff}
+.skills{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.skill{background:#1a1a1a;padding:12px;border-radius:8px;border-right:3px solid #ff00ff}
+@media(max-width:700px){.header{flex-direction:column;text-align:center}.skills{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="container"><div class="content">
+<div class="header">
+<img src="photo.jpg">
+<div>
+<h1>اكتب اسمك هنا</h1>
+<p style="color:#ff00ff">المسمى الوظيفي</p>
+<p>📧 ايميلك | 📱 رقمك | 📍 مكانك</p>
+</div>
+</div>
+<h2>الملخص المهني</h2>
+<div class="item">اكتب عن نفسك هنا</div>
+<h2>الخبرات</h2>
+<div class="item"><b>اسم الوظيفة</b><br>اسم الشركة | 2024<br>المهام</div>
+<h2>التعليم</h2>
+<div class="item"><b>اسم الشهادة</b><br>اسم الجامعة | 2022-2026</div>
+<h2>المهارات</h2>
+<div class="skills">
+<div class="skill">المهارة 1</div>
+<div class="skill">المهارة 2</div>
+<div class="skill">اللغة العربية</div>
+<div class="skill">اللغة الانجليزية</div>
+</div>
+<h2>المشاريع</h2>
+<div class="item"><b>اسم المشروع</b><br>وصف المشروع</div>
+</div></div>
+</body>
+  </html>
