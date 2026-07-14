@@ -3,45 +3,76 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>انشاء سيرة ذاتية</title>
+<title>السيرة الذاتية</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
-body{font-family:'Cairo';background:#0a0a0a;margin:0;padding:20px;display:flex;justify-content:center;align-items:center;min-height:100vh}
-.box{width:100%;max-width:500px;background:#121212;border-radius:25px;padding:3px;position:relative}
-.box::before{content:'';position:absolute;top:-3px;left:-3px;right:-3px;bottom:-3px;background:linear-gradient(45deg,#ff00ff,#00f5ff);border-radius:25px;z-index:-1}
-.content{background:#121212;border-radius:22px;padding:30px;color:#fff}
-h1{text-align:center;color:#00f5ff;text-shadow:0 0 15px #00f5ff;font-size:28px;margin-bottom:30px}
-label{color:#ff00ff;display:block;margin-top:20px;font-weight:bold;font-size:18px;text-align:right}
-input{width:100%;padding:14px;margin-top:8px;border-radius:12px;border:2px solid #00f5ff;background:#1a1a1a;color:#fff;font-family:'Cairo';font-size:16px;box-sizing:border-box}
-button{background:linear-gradient(45deg,#00ff88,#00f5ff);border:none;padding:18px;border-radius:15px;color:#000;font-weight:bold;font-size:20px;cursor:pointer;width:100%;margin-top:30px;font-family:'Cairo'}
+body{font-family:'Cairo';background:#0a0a0a;margin:0;padding:20px;display:flex;justify-content:center}
+.container{max-width:800px;width:100%;background:#121212;border-radius:20px;padding:3px;position:relative}
+.container::before{content:'';position:absolute;top:-3px;left:-3px;right:-3px;bottom:-3px;background:linear-gradient(45deg,#00f5ff,#ff00ff);background-size:400%;border-radius:20px;z-index:-1;animation:glow 4s linear infinite}
+@keyframes glow{0%{background-position:0% 50%}100%{background-position:400% 50%}}
+.content{background:#121212;border-radius:17px;padding:30px;color:#fff}
+h1{text-align:center;color:#00f5ff;text-shadow:0 0 10px #00f5ff}
+h2{color:#ff00ff;text-shadow:0 0 8px #ff00ff;border-right:4px solid #ff00ff;padding-right:12px}
+.item{background:#1a1a1a;padding:20px;border-radius:12px;margin-bottom:15px;border-right:3px solid #00f5ff;min-height:60px}
+[contenteditable="true"]:focus{background:#222;border-right:3px solid #ff00ff;outline:none}
+.upload-box{background:#1a1a1a;padding:15px;border-radius:12px;border:2px dashed #00f5ff;text-align:center;margin-bottom:15px}
+.upload-box input{display:none}
+.upload-label{cursor:pointer;color:#00f5ff;font-weight:bold}
+.cert-img{max-width:100%;border-radius:8px;margin-top:10px;border:2px solid #ff00ff}
+.print-btn{background:linear-gradient(45deg,#00f5ff,#ff00ff);border:none;padding:15px;border-radius:10px;color:#000;font-weight:bold;font-size:18px;cursor:pointer;width:100%;margin-top:15px;font-family:'Cairo'}
+.notify-btn{background:linear-gradient(45deg,#00ff88,#00f5ff);border:none;padding:15px;border-radius:10px;color:#000;font-weight:bold;font-size:18px;cursor:pointer;width:100%;margin-top:15px;font-family:'Cairo'}
+@media print{.print-btn,.notify-btn{display:none}body{background:#fff;color:#000}.container::before{display:none}}
 </style>
 </head>
 <body>
-<div class="box"><div class="content">
-<h1>انشاء سيرة ذاتية</h1>
-<form onsubmit="sendAndGo(event)">
-<label>الاسم</label>
-<input type="text" id="name" required>
-<label>الايميل</label>
-<input type="email" id="email" required>
-<label>رقم الجوال</label>
-<input type="tel" id="phone">
-<label>المسمى الوظيفي</label>
-<input type="text" id="job">
-<button type="submit">ارسال السيرة 📤</button>
-</form>
+<div class="container"><div class="content">
+<h1 contenteditable="true">اكتب اسمك هنا</h1>
+<p contenteditable="true" style="text-align:center;color:#ff00ff">المسمى الوظيفي</p>
+<p contenteditable="true" style="text-align:center">📧 ايميلك | 📱 رقمك | 📍 مكانك</p>
+<h2>الملخص المهني</h2>
+<div class="item" contenteditable="true">اكتب عن نفسك هنا</div>
+<h2>الخبرات</h2>
+<div class="item" contenteditable="true">
+<b>اسم الوظيفة</b><br>
+اسم الشركة | 2024<br>
+المهام
+</div>
+<h2>التعليم</h2>
+<div class="item" contenteditable="true">
+<b>اسم الشهادة</b><br>
+اسم الجامعة | 2022-2026
+</div>
+<h2>المهارات</h2>
+<div class="item" contenteditable="true">المهارة 1</div>
+<div class="item" contenteditable="true">المهارة 2</div>
+<div class="item" contenteditable="true">المهارة 3</div>
+<h2>المشاريع</h2>
+<div class="item" contenteditable="true"><b>اسم المشروع</b><br>وصف المشروع</div>
+<h2>الشهادات المرفقة</h2>
+<div class="upload-box no-print">
+<input type="file" id="certUpload" accept="image/*">
+<label for="certUpload" class="upload-label">📎 اضغط لارفاق صورة الشهادة</label>
+</div>
+<div id="certPreview"></div>
+<button class="print-btn" onclick="window.print()">🖨️ حفظ كـ PDF</button>
+<button class="notify-btn" onclick="sendEmail()">📧 ارسل نسخة لصاحب الموقع</button>
 </div></div>
 <script>
-function sendAndGo(e){
-e.preventDefault();
-let name = document.getElementById('name').value;
-let email = document.getElementById('email').value;
-let phone = document.getElementById('phone').value;
-let job = document.getElementById('job').value;
-window.location.href = "mailto:your-email@gmail.com?subject=شخص جديد دخل: " + name + "&body=الاسم: " + name + "%0Aالايميل: " + email + "%0Aالجوال: " + phone + "%0Aالوظيفة: " + job;
-setTimeout(function(){
-    window.location.href = "https://dotcomb.github.io/";
-}, 800);
+document.getElementById('certUpload').addEventListener('change', function(e){
+const file = e.target.files[0];
+if(file){
+const reader = new FileReader();
+reader.onload = function(event){
+document.getElementById('certPreview').innerHTML = `<img src="${event.target.result}" class="cert-img">`;
+}
+reader.readAsDataURL(file);
+}
+});
+function sendEmail(){
+let name = document.querySelector('h1').innerText;
+let subject = "شخص جديد انشأ سيرة ذاتية: " + name;
+let body = "الاسم: " + name + "%0Aتم انشاء سيرة ذاتية جديدة على الموقع";
+window.location.href = "mailto:your-email@gmail.com?subject=" + subject + "&body=" + body;
 }
 </script>
 </body>
