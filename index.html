@@ -19,8 +19,9 @@ h2{color:#ff00ff;text-shadow:0 0 8px #ff00ff;border-right:4px solid #ff00ff;padd
 .upload-box input{display:none}
 .upload-label{cursor:pointer;color:#00f5ff;font-weight:bold}
 .cert-img{max-width:100%;border-radius:8px;margin-top:10px;border:2px solid #ff00ff}
-.print-btn{background:linear-gradient(45deg,#00f5ff,#ff00ff);border:none;padding:15px;border-radius:10px;color:#000;font-weight:bold;font-size:18px;cursor:pointer;width:100%;margin-top:20px;font-family:'Cairo'}
-@media print{.print-btn{display:none}body{background:#fff;color:#000}.container::before{display:none}}
+.print-btn{background:linear-gradient(45deg,#00f5ff,#ff00ff);border:none;padding:15px;border-radius:10px;color:#000;font-weight:bold;font-size:18px;cursor:pointer;width:100%;margin-top:15px;font-family:'Cairo'}
+.notify-btn{background:linear-gradient(45deg,#00ff88,#00f5ff);border:none;padding:15px;border-radius:10px;color:#000;font-weight:bold;font-size:18px;cursor:pointer;width:100%;margin-top:15px;font-family:'Cairo'}
+@media print{.print-btn,.notify-btn{display:none}body{background:#fff;color:#000}.container::before{display:none}}
 </style>
 </head>
 <body>
@@ -54,6 +55,7 @@ h2{color:#ff00ff;text-shadow:0 0 8px #ff00ff;border-right:4px solid #ff00ff;padd
 </div>
 <div id="certPreview"></div>
 <button class="print-btn" onclick="window.print()">🖨️ حفظ كـ PDF</button>
+<button class="notify-btn" onclick="sendEmail()">📧 ارسل نسخة لصاحب الموقع</button>
 </div></div>
 <script>
 document.getElementById('certUpload').addEventListener('change', function(e){
@@ -66,6 +68,12 @@ document.getElementById('certPreview').innerHTML = `<img src="${event.target.res
 reader.readAsDataURL(file);
 }
 });
+function sendEmail(){
+let name = document.querySelector('h1').innerText;
+let subject = "شخص جديد انشأ سيرة ذاتية: " + name;
+let body = "الاسم: " + name + "%0Aتم انشاء سيرة ذاتية جديدة على الموقع";
+window.location.href = "mailto:your-email@gmail.com?subject=" + subject + "&body=" + body;
+}
 </script>
 </body>
 </html>
