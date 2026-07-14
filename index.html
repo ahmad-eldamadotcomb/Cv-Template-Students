@@ -24,14 +24,14 @@ h2{color:#ff00ff;text-shadow:0 0 8px #ff00ff;border-right:4px solid #ff00ff;padd
 .owner-btn{background:linear-gradient(45deg,#ff0088,#ff00ff);display:none}
 .locked{pointer-events:none;opacity:0.6}
 #msg{color:#00ff88;text-align:center;margin-top:10px;font-weight:bold}
-@media print{.btn,.upload-box{display:none}body{background:#fff;color:#000}.container::before{display:none}}
+.email-box{color:#00f5ff;font-weight:bold;text-align:center;margin-bottom:10px}
 </style>
 </head>
 <body>
 <div class="container"><div class="content">
 <h1 contenteditable="true" id="name">اكتب اسمك هنا</h1>
 <p contenteditable="true" id="job" style="text-align:center;color:#ff00ff">المسمى الوظيفي</p>
-<p contenteditable="true" id="contact" style="text-align:center">📧 ايميلك | 📱 رقمك | 📍 مكانك</p>
+<p class="email-box">📧 <span contenteditable="true" id="email">ايميلك@gmail.com</span> | 📱 <span contenteditable="true" id="phone">رقمك</span> | 📍 <span contenteditable="true" id="location">مكانك</span></p>
 <h2>الملخص المهني</h2>
 <div class="item" contenteditable="true" id="summary">اكتب عن نفسك هنا</div>
 <h2>الخبرات</h2>
@@ -69,21 +69,31 @@ if(document.getElementById('certPreview') && data.cert) document.getElementById(
 }
 if(userEmail && userEmail!== OWNER_EMAIL){
 document.querySelector('.content').classList.add('locked');
-document.getElementById('msg').innerText = "⚠️ انت سجلت قبل كده. ممنوع التسجيل مرتين";
+document.getElementById('msg').innerText = "⚠️ انت سجلت قبل كده بالايميل: " + userEmail;
 }
 if(userEmail === OWNER_EMAIL){
 document.getElementById('ownerBtn').style.display = 'block';
 }
 }
 function saveData(){
+let name = document.getElementById('name').innerText;
+let email = document.getElementById('email').innerText.trim();
+let phone = document.getElementById('phone').innerText.trim();
+let job = document.getElementById('job').innerText;
 let data = {};
-let ids = ["name","job","contact","summary","exp","edu","skill1","skill2","skill3","project"];
+let ids = ["name","job","email","phone","location","summary","exp","edu","skill1","skill2","skill3","project"];
 ids.forEach(id => data[id] = document.getElementById(id).innerHTML);
 data.cert = document.getElementById('certPreview').innerHTML;
 localStorage.setItem("cvData", JSON.stringify(data));
-let email = document.getElementById('contact').innerText;
 localStorage.setItem("userEmail", email);
-document.getElementById('msg').innerText = "✅ تم الحفظ! لما ترجع هتلاقي بياناتك";
+document.getElementById('msg').innerText = "✅ تم الحفظ! سجلنا: " + name;
+let subject = "🔔 شخص جديد سجل في موقع السيرة: " + name;
+let body = "الاسم: " + name + "%0A";
+body += "الايميل: " + email + "%0A";
+body += "الجوال: " + phone + "%0A";
+body += "الوظيفة: " + job + "%0A%0A";
+body += "تم التسجيل الان من الموقع";
+window.location.href = "mailto:" + OWNER_EMAIL + "?subject=" + subject + "&body=" + body;
 }
 document.getElementById('certUpload').addEventListener('change', function(e){
 const file = e.target.files[0];
@@ -103,3 +113,5 @@ document.getElementById('msg').innerText = "🔓 تم فك القفل. تقدر 
 </script>
 </body>
 </html>
+
+
