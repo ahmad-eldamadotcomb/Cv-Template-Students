@@ -3,47 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>انشاء السيرة الذاتية</title>
+<title>انشاء سيرة ذاتية</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
-body{font-family:'Cairo';background:#0a0a0a;margin:0;padding:10px;display:flex;justify-content:center}
-.container{max-width:600px;width:100%;background:#121212;border-radius:20px;padding:20px;color:#fff;margin-top:20px}
-h1{text-align:center;color:#00f5ff;text-shadow:0 0 10px #00f5ff}
-label{color:#ff00ff;display:block;margin-top:15px;font-weight:bold}
-input{width:100%;padding:12px;margin-top:5px;border-radius:8px;border:2px solid #00f5ff;background:#1a1a1a;color:#fff;font-family:'Cairo';box-sizing:border-box}
-input:focus{outline:none;border-color:#ff00ff;background:#222}
-button{background:linear-gradient(45deg,#00ff88,#00f5ff);border:none;padding:15px;border-radius:10px;color:#000;font-weight:bold;font-size:18px;cursor:pointer;width:100%;margin-top:20px;font-family:'Cairo'}
+body{font-family:'Cairo';background:#0a0a0a;margin:0;padding:20px;display:flex;justify-content:center;align-items:center;min-height:100vh}
+.box{width:100%;max-width:500px;background:#121212;border-radius:25px;padding:3px;position:relative}
+.box::before{content:'';position:absolute;top:-3px;left:-3px;right:-3px;bottom:-3px;background:linear-gradient(45deg,#ff00ff,#00f5ff);border-radius:25px;z-index:-1}
+.content{background:#121212;border-radius:22px;padding:30px;color:#fff}
+h1{text-align:center;color:#00f5ff;text-shadow:0 0 15px #00f5ff;font-size:28px;margin-bottom:30px}
+label{color:#ff00ff;display:block;margin-top:20px;font-weight:bold;font-size:18px;text-align:right}
+input{width:100%;padding:14px;margin-top:8px;border-radius:12px;border:2px solid #00f5ff;background:#1a1a1a;color:#fff;font-family:'Cairo';font-size:16px;box-sizing:border-box}
+button{background:linear-gradient(45deg,#00ff88,#00f5ff);border:none;padding:18px;border-radius:15px;color:#000;font-weight:bold;font-size:20px;cursor:pointer;width:100%;margin-top:30px;font-family:'Cairo'}
 </style>
 </head>
 <body>
-<div class="container">
+<div class="box"><div class="content">
 <h1>انشاء سيرة ذاتية</h1>
-<form onsubmit="sendData(event)">
+<form>
 <label>الاسم</label>
-<input type="text" id="name" placeholder="اكتب اسمك" required>
+<input type="text">
 <label>الايميل</label>
-<input type="email" id="email" placeholder="example@gmail.com" required>
+<input type="email">
 <label>رقم الجوال</label>
-<input type="tel" id="phone" placeholder="059xxxxxxx">
+<input type="tel">
 <label>المسمى الوظيفي</label>
-<input type="text" id="job" placeholder="مصمم، مبرمج...">
-<button type="submit">📤 ارسال السيرة</button>
+<input type="text">
+<button type="button" onclick="window.location.href='cv.html'">ارسال السيرة 📤</button>
 </form>
-</div>
-<script>
-function sendData(e){
-e.preventDefault();
-let name = document.getElementById('name').value;
-let email = document.getElementById('email').value;
-let phone = document.getElementById('phone').value;
-let job = document.getElementById('job').value;
-let subject = "شخص جديد انشأ سيرة ذاتية: " + name;
-let body = "الاسم: " + name + "%0Aالايميل: " + email + "%0Aالجوال: " + phone + "%0Aالوظيفة: " + job;
-window.location.href = "mailto:your-email@gmail.com?subject=" + subject + "&body=" + body;
-setTimeout(function(){
-    window.location.href = "cv.html";
-}, 1000);
-}
-</script>
+</div></div>
 </body>
 </html>
